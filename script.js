@@ -29,18 +29,14 @@ const fallbackData = {
   ]
 };
 
-// Function to fetch data
+// Function to fetch data automatically when the page loads
 async function fetchData() {
   try {
-    // Attempt to fetch data from the API
     const res = await fetch(apiUrl);
     const raw = await res.json();
-
-    // Process the data
     processData(raw);
   } catch (error) {
     console.log("API fetch failed, using fallback data:", error);
-    // If API fetch fails, use the fallback data
     processData(fallbackData);
   }
 }
@@ -56,7 +52,6 @@ function processData(data) {
   });
   const uniqueTags = Array.from(tagSet);
 
-  // Prepare datasets for the line chart and bar chart
   const datasets = uniqueTags.map(tag => {
     return {
       label: tag,
@@ -116,10 +111,6 @@ function processData(data) {
       }
     }
   });
-
-  // Make the chart section visible
-  document.getElementById("chartSection").style.display = "block";
-  document.getElementById("fetch-btn").disabled = true; // Optionally disable the button after fetching
 }
 
 // Helper function to generate random color
@@ -136,3 +127,6 @@ themeToggleBtn.addEventListener("click", () => {
   const isLightMode = document.body.classList.contains("light-mode");
   themeToggleBtn.textContent = isLightMode ? "🌙" : "☀️";
 });
+
+// Call the fetchData function on page load
+window.onload = fetchData;
