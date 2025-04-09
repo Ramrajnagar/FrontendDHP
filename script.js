@@ -1,7 +1,7 @@
-const apiUrl = "https://dhp-backend-production.up.railway.app/data"; // ✅ Make sure this is reachable
+// Set your API URL
+const apiUrl = "https://dhp-backend-production.up.railway.app/data";
 
-
-// Fallback data if the API link is not working
+// Fallback data in case the API is unavailable
 const fallbackData = {
   "2023": [
     { "count": 266, "tag": "python" },
@@ -124,11 +124,32 @@ function renderBarChart(labels, datasets) {
   });
 }
 
-// Function to generate a random color for the chart lines/bars
+// Helper function to generate random color
 function getRandomColor() {
-  const hue = Math.floor(Math.random() * 360);
-  return `hsl(${hue}, 70%, 60%)`;
+  return 'rgba(' + Math.floor(Math.random() * 256) + ',' +
+                   Math.floor(Math.random() * 256) + ',' +
+                   Math.floor(Math.random() * 256) + ', 0.6)';
 }
 
-// Call the fetchData function when the page is loaded
-fetchData();
+// Toggle theme between dark and light mode
+const toggleBtn = document.getElementById("theme-toggle");
+toggleBtn.addEventListener("click", function() {
+  document.body.classList.toggle("dark-mode");
+  toggleBtn.innerHTML = document.body.classList.contains("dark-mode") ? "🌞" : "🌙";
+});
+
+// Handle fetch button click
+document.getElementById("fetch-btn").addEventListener("click", function() {
+  fetchData();
+  document.getElementById("chartSection").style.display = "block";
+});
+
+// Love Button Toggle
+document.getElementById("love-btn").addEventListener("click", function() {
+  const btn = document.getElementById("love-btn");
+  if (btn.innerHTML === "❤️") {
+    btn.innerHTML = "💖";
+  } else {
+    btn.innerHTML = "❤️";
+  }
+});
