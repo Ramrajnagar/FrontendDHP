@@ -1,19 +1,25 @@
-const apiUrl = "https://your-flask-api.onrender.com/data"; // Replace with your backend URL
+const apiUrl = "https://dhp-backend-production.up.railway.app/data";
 
 async function fetchData() {
   const res = await fetch(apiUrl);
   const raw = await res.json();
 
-  // Process the data: count technologies per date
-  const dateCounts = {};
+  // Count total tags per date
+  const dateTagCount = {};
+
   raw.forEach(item => {
     const date = item.date;
-    if (!dateCounts[date]) dateCounts[date] = 0;
-    dateCounts[date]++;
+    const tagCount = item.tags.length;
+
+    if (!dateTagCount[date]) {
+      dateTagCount[date] = 0;
+    }
+
+    dateTagCount[date] += tagCount;
   });
 
-  const labels = Object.keys(dateCounts);
-  const values = Object.values(dateCounts);
+  const labels = Object.keys(dateTagCount);
+  const values = Object.values(dateTagCount);
 
   renderLineChart(labels, values);
   renderBarChart(labels, values);
@@ -26,7 +32,7 @@ function renderLineChart(labels, values) {
     data: {
       labels,
       datasets: [{
-        label: 'Technology Count (Line)',
+        label: 'Total Tags per Date (Line)',
         data: values,
         borderColor: '#58a6ff',
         backgroundColor: '#58a6ff44',
@@ -56,7 +62,7 @@ function renderBarChart(labels, values) {
     data: {
       labels,
       datasets: [{
-        label: 'Technology Count (Bar)',
+        label: 'Total Tags per Date (Bar)',
         data: values,
         backgroundColor: '#238636'
       }]
