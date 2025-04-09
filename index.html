@@ -2,16 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Top Languages by Year</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body style="background-color: #0d1117; color: white; text-align: center;">
+<body>
 
-  <h2>Top 6 Programming Languages Per Year</h2>
+  <!-- Header with title and dark mode toggle -->
+  <header>
+    <h1>Top Programming Languages by Year</h1>
+    <button id="theme-toggle" class="theme-toggle-btn">🌙</button>
+  </header>
 
-  <canvas id="lineChart" width="800" height="400"></canvas>
-  <br>
-  <canvas id="barChart" width="800" height="400"></canvas>
+  <!-- Follow & Love Section -->
+  <div class="social-section">
+    <button class="follow-btn">Follow</button>
+    <button class="love-btn" id="love-btn">❤️</button>
+    <p id="quote" class="quote">"Code is like humor. When you have to explain it, it’s bad." – Cory House</p>
+  </div>
+
+  <!-- Motivational Quote Section -->
+  <div class="quote-section">
+    <h3 class="quote-heading">Motivational Quote:</h3>
+    <p class="quote-text">"The best way to predict the future is to invent it." – Alan Kay</p>
+  </div>
+
+  <!-- Graph Section -->
+  <div class="chart-container">
+    <button class="fetch-btn" id="fetch-btn">Show Graph</button>
+
+    <div id="chartSection" class="charts">
+      <canvas id="lineChart"></canvas>
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025, Your Name</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
