@@ -67,61 +67,58 @@ function processData(data) {
       borderColor: getRandomColor(),
       backgroundColor: getRandomColor(),
       fill: false,
-      tension: 0.3
+      tension: 0.1
     };
   });
 
-  // Render the charts
-  renderLineChart(labels, datasets);
-  renderBarChart(labels, datasets);
-}
-
-// Function to render the line chart
-function renderLineChart(labels, datasets) {
-  const ctx = document.getElementById('lineChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
+  // Line Chart
+  const lineChartContext = document.getElementById("lineChart").getContext("2d");
+  new Chart(lineChartContext, {
+    type: "line",
     data: {
       labels: labels,
       datasets: datasets
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: {
-          labels: { color: "#c9d1d9" }
-        }
-      },
       scales: {
-        x: { ticks: { color: "#c9d1d9" } },
-        y: { ticks: { color: "#c9d1d9" } }
+        x: {
+          title: { text: "Year", display: true, color: "#c9d1d9" },
+          ticks: { color: "#c9d1d9" }
+        },
+        y: {
+          title: { text: "Count", display: true, color: "#c9d1d9" },
+          ticks: { color: "#c9d1d9" }
+        }
       }
     }
   });
-}
 
-// Function to render the bar chart
-function renderBarChart(labels, datasets) {
-  const ctx = document.getElementById('barChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
+  // Bar Chart
+  const barChartContext = document.getElementById("barChart").getContext("2d");
+  new Chart(barChartContext, {
+    type: "bar",
     data: {
       labels: labels,
       datasets: datasets
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: {
-          labels: { color: "#c9d1d9" }
-        }
-      },
       scales: {
-        x: { stacked: true, ticks: { color: "#c9d1d9" } },
-        y: { stacked: true, ticks: { color: "#c9d1d9" } }
+        x: {
+          title: { text: "Year", display: true, color: "#c9d1d9" },
+          ticks: { color: "#c9d1d9" }
+        },
+        y: {
+          title: { text: "Count", display: true, color: "#c9d1d9" },
+          ticks: { color: "#c9d1d9" }
+        }
       }
     }
   });
+
+  // Show the charts section
+  document.getElementById("chartSection").style.display = "block";
 }
 
 // Helper function to generate random color
@@ -134,8 +131,8 @@ function getRandomColor() {
 // Toggle theme between dark and light mode
 const toggleBtn = document.getElementById("theme-toggle");
 toggleBtn.addEventListener("click", function() {
-  document.body.classList.toggle("dark-mode");
-  toggleBtn.innerHTML = document.body.classList.contains("dark-mode") ? "🌞" : "🌙";
+  document.body.classList.toggle("light-mode");
+  toggleBtn.innerHTML = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
 });
 
 // Handle fetch button click
