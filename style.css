@@ -1,46 +1,179 @@
+/* Color Variables */
 :root {
-    --bg: #0d1117;
-    --card-bg: #161b22;
-    --text: #c9d1d9;
-    --accent: #58a6ff;
-  }
-  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    padding: 2rem;
-  }
-  
-  header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .chart-container {
-    background-color: var(--card-bg);
-    padding: 1rem;
-    margin: 1rem auto;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    max-width: 800px;
-  }
-  
-  canvas {
-    width: 100% !important;
-    height: 400px !important;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 3rem;
-    font-size: 0.9rem;
-    color: #8b949e;
-  }
-  
+  --bg-light: #fafafa;
+  --bg-dark: #0d1117;
+  --card-bg-light: #ffffff;
+  --card-bg-dark: #161b22;
+  --text-light: #000000;
+  --text-dark: #c9d1d9;
+  --accent-light: #0095f6;
+  --accent-dark: #58a6ff;
+  --button-light: #d1d1d1;
+  --button-dark: #333;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--accent-dark);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.theme-toggle-btn:hover {
+  color: var(--accent-light);
+}
+
+/* Social Section */
+.social-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.follow-btn, .love-btn {
+  background-color: var(--accent-dark);
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s;
+}
+
+.follow-btn:hover, .love-btn:hover {
+  background-color: var(--accent-light);
+}
+
+#quote {
+  font-style: italic;
+  color: #ff6699;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+/* Quote Section */
+.quote-section {
+  text-align: center;
+  background-color: var(--card-bg-dark);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.quote-heading {
+  color: var(--accent-dark);
+  font-size: 1.5rem;
+}
+
+.quote-text {
+  color: var(--text-light);
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Chart Container */
+.chart-container {
+  background-color: var(--card-bg-dark);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.fetch-btn {
+  background-color: var(--accent-dark);
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fetch-btn:hover {
+  background-color: var(--accent-light);
+}
+
+.charts {
+  display: none; /* Hidden by default */
+}
+
+canvas {
+  width: 100% !important;
+  height: 400px !important;
+  border-radius: 10px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+/* Dark Mode Specific Styles */
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+body.dark-mode header {
+  color: var(--text-light);
+}
+
+body.dark-mode .chart-container {
+  background-color: var(--card-bg-dark);
+}
+
+body.dark-mode .fetch-btn {
+  background-color: var(--button-dark);
+}
+
+body.dark-mode .fetch-btn:hover {
+  background-color: var(--accent-dark);
+}
+
+body.dark-mode footer {
+  color: var(--text-light);
+}
