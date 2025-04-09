@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Top Languages by Year</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -19,26 +19,9 @@
 
   <!-- Main Content -->
   <div class="main-content">
-
-    <!-- User Interaction Section -->
-    <div class="user-interaction">
-      <button class="like-btn">👍 Like</button>
-      <button class="comment-btn">💬 Comment</button>
-      <p id="like-count">Likes: 0</p>
-      <p id="comment-count">Comments: 0</p>
-    </div>
-
-    <!-- Trending Programming Languages -->
-    <div class="trending-languages">
-      <h3>Trending Programming Languages</h3>
-      <ul>
-        <li>Python</li>
-        <li>JavaScript</li>
-        <li>ReactJS</li>
-        <li>Java</li>
-        <li>TypeScript</li>
-        <li>C#</li>
-      </ul>
+    <div class="social-section">
+      <button class="follow-btn">Follow</button>
+      <button class="love-btn" id="love-btn">❤️</button>
     </div>
 
     <!-- Motivational Quote Section -->
@@ -47,35 +30,15 @@
       <p class="quote-text">"The best way to predict the future is to invent it." – Alan Kay</p>
     </div>
 
-    <!-- Explore Section -->
-    <div class="explore-section">
-      <h3>Explore the Best Resources</h3>
-      <ul>
-        <li><a href="#">Python Official Documentation</a></li>
-        <li><a href="#">JavaScript Tutorials</a></li>
-        <li><a href="#">ReactJS Learning Path</a></li>
-        <li><a href="#">Java Resources</a></li>
-        <li><a href="#">TypeScript Guide</a></li>
-      </ul>
-    </div>
-
     <!-- Graph Section -->
     <div class="chart-container">
-      <button class="fetch-btn" id="fetch-btn">Show Graph</button>
+      <button class="fetch-btn" id="fetch-btn">Fetch Data</button>
 
       <div id="chartSection" class="charts" style="display: none;">
         <canvas id="lineChart"></canvas>
         <canvas id="barChart"></canvas>
       </div>
     </div>
-
-    <!-- Testimonial Section -->
-    <div class="testimonial-section">
-      <h3>What People Are Saying</h3>
-      <p>"This website helped me understand the programming language trends. It's fantastic!" - John Doe</p>
-      <p>"Great resource for tracking top languages and learning!" - Jane Smith</p>
-    </div>
-
   </div>
 
   <!-- Footer -->
