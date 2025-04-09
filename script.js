@@ -117,8 +117,9 @@ function processData(data) {
     }
   });
 
-  // Show the charts section
+  // Make the chart section visible
   document.getElementById("chartSection").style.display = "block";
+  document.getElementById("fetch-btn").disabled = true; // Optionally disable the button after fetching
 }
 
 // Helper function to generate random color
@@ -128,23 +129,10 @@ function getRandomColor() {
                    Math.floor(Math.random() * 256) + ', 0.6)';
 }
 
-// Toggle theme between dark and light mode
-const toggleBtn = document.getElementById("theme-toggle");
-toggleBtn.addEventListener("click", function() {
+// Light/dark mode toggle
+const themeToggleBtn = document.getElementById("theme-toggle");
+themeToggleBtn.addEventListener("click", () => {
   document.body.classList.toggle("light-mode");
-  toggleBtn.innerHTML = document.body.classList.contains("light-mode") ? "🌞" : "🌙";
+  const isLightMode = document.body.classList.contains("light-mode");
+  themeToggleBtn.textContent = isLightMode ? "🌙" : "☀️";
 });
-
-// Handle fetch button click
-document.getElementById("fetch-btn").addEventListener("click", function() {
-  fetchData();
-  document.getElementById("chartSection").style.display = "block";
-});
-
-// Love Button Toggle
-document.getElementById("love-btn").addEventListener("click", function() {
-  const btn = document.getElementById("love-btn");
-  if (btn.innerHTML === "❤️") {
-    btn.innerHTML = "💖";
-  } else {
-    btn.innerHTML = "❤️";
