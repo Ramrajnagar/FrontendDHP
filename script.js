@@ -148,5 +148,3 @@ document.getElementById("love-btn").addEventListener("click", function() {
     btn.innerHTML = "💖";
   } else {
     btn.innerHTML = "❤️";
-  }
-});
