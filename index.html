@@ -9,35 +9,39 @@
 </head>
 <body>
 
-  <!-- Header with title and dark mode toggle -->
+  <!-- Header with logo and dark/light mode toggle -->
   <header>
-    <h1>Top Programming Languages by Year</h1>
+    <div class="logo">
+      <h1>ProgStats</h1>
+    </div>
     <button id="theme-toggle" class="theme-toggle-btn">🌙</button>
   </header>
 
-  <!-- Follow & Love Section -->
-  <div class="social-section">
-    <button class="follow-btn">Follow</button>
-    <button class="love-btn" id="love-btn">❤️</button>
-    <p id="quote" class="quote">"Code is like humor. When you have to explain it, it’s bad." – Cory House</p>
-  </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="social-section">
+      <button class="follow-btn">Follow</button>
+      <button class="love-btn" id="love-btn">❤️</button>
+    </div>
 
-  <!-- Motivational Quote Section -->
-  <div class="quote-section">
-    <h3 class="quote-heading">Motivational Quote:</h3>
-    <p class="quote-text">"The best way to predict the future is to invent it." – Alan Kay</p>
-  </div>
+    <!-- Motivational Quote Section -->
+    <div class="quote-section">
+      <h3 class="quote-heading">Motivational Quote:</h3>
+      <p class="quote-text">"The best way to predict the future is to invent it." – Alan Kay</p>
+    </div>
 
-  <!-- Graph Section -->
-  <div class="chart-container">
-    <button class="fetch-btn" id="fetch-btn">Show Graph</button>
+    <!-- Graph Section -->
+    <div class="chart-container">
+      <button class="fetch-btn" id="fetch-btn">Show Graph</button>
 
-    <div id="chartSection" class="charts">
-      <canvas id="lineChart"></canvas>
-      <canvas id="barChart"></canvas>
+      <div id="chartSection" class="charts">
+        <canvas id="lineChart"></canvas>
+        <canvas id="barChart"></canvas>
+      </div>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025, Your Name</p>
   </footer>
