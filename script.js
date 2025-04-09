@@ -6,81 +6,92 @@ const apiUrl = "https://dhp-backend-production.up.railway.app/data";
 async function fetchData() {
   try {
     const res = await fetch(apiUrl);
-    if (!res.ok) {
-      throw new Error(`HTTP error! Status: ${res.status}`);
-    }
-
     const raw = await res.json();
 
-    const dateTagCount = {};
+    // Extract labels (years) and tag-wise values
+    const labels = Object.keys(raw); // ["2023", "2024", "2025"]
 
-    raw.forEach(item => {
-      const date = item.date;
-      const tagCount = item.tags.length;
-
-      if (!dateTagCount[date]) {
-        dateTagCount[date] = 0;
-      }
-
-      dateTagCount[date] += tagCount;
+    // Collect all unique tags across years
+    const tagSet = new Set();
+    labels.forEach(year => {
+      raw[year].forEach(item => tagSet.add(item.tag));
     });
 
-    const labels = Object.keys(dateTagCount);
-    const values = Object.values(dateTagCount);
+    const uniqueTags = Array.from(tagSet); // All tags that appeared in top 6 of any year
 
-    renderLineChart(labels, values);
-    renderBarChart(labels, values);
+    // Build dataset for each tag
+    const datasets = uniqueTags.map(tag => {
+      return {
+        label: tag,
+        data: labels.map(year => {
+          const tagData = raw[year].find(item => item.tag === tag);
+          return tagData ? tagData.count : 0;
+        }),
+        borderWidth: 2,
+        fill: false,
+        tension: 0.3,
+        borderColor: getRandomColor(),
+        backgroundColor: getRandomColor()
+      };
+    });
+
+    renderLineChart(labels, datasets);
+    renderBarChart(labels, datasets);
   } catch (error) {
-    console.error("Error fetching or processing data:", error);
-    alert("Failed to fetch data: " + error.message);
+    console.error("❌ Failed to fetch or process data:", error);
   }
 }
 
-function renderLineChart(labels, values) {
+function renderLineChart(labels, datasets) {
   const ctx = document.getElementById('lineChart').getContext('2d');
   new Chart(ctx, {
     type: 'line',
     data: {
       labels,
-      datasets: [{
-        label: 'Total Tags per Date (Line)',
-        data: values,
-        borderColor: '#58a6ff',
-        backgroundColor: '#58a6ff44',
-        tension: 0.3,
-        fill: true
-      }]
+      datasets
     },
     options: {
       responsive: true,
       scales: {
-        x: { ticks: { color: "#000" } },
-        y: { ticks: { color: "#000" } }
+        x: { ticks: { color: "#c9d1d9" } },
+        y: { ticks: { color: "#c9d1d9" } }
+      },
+      plugins: {
+        legend: {
+          labels: { color: "#c9d1d9" }
+        }
       }
     }
   });
 }
 
-function renderBarChart(labels, values) {
+function renderBarChart(labels, datasets) {
   const ctx = document.getElementById('barChart').getContext('2d');
   new Chart(ctx, {
     type: 'bar',
     data: {
       labels,
-      datasets: [{
-        label: 'Total Tags per Date (Bar)',
-        data: values,
-        backgroundColor: '#238636'
-      }]
+      datasets
     },
     options: {
       responsive: true,
       scales: {
-        x: { ticks: { color: "#000" } },
-        y: { ticks: { color: "#000" } }
+        x: { stacked: true, ticks: { color: "#c9d1d9" } },
+        y: { stacked: true, ticks: { color: "#c9d1d9" } }
+      },
+      plugins: {
+        legend: {
+          labels: { color: "#c9d1d9" }
+        }
       }
     }
   });
+}
+
+// Generate random pastel colors
+function getRandomColor() {
+  const hue = Math.floor(Math.random() * 360);
+  return `hsl(${hue}, 70%, 60%)`;
 }
 
 fetchData();
