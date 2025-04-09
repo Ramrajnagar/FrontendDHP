@@ -1,28 +1,39 @@
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
 const apiUrl = "https://dhp-backend-production.up.railway.app/data";
 
 async function fetchData() {
-  const res = await fetch(apiUrl);
-  const raw = await res.json();
-
-  // Count total tags per date
-  const dateTagCount = {};
-
-  raw.forEach(item => {
-    const date = item.date;
-    const tagCount = item.tags.length;
-
-    if (!dateTagCount[date]) {
-      dateTagCount[date] = 0;
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
     }
 
-    dateTagCount[date] += tagCount;
-  });
+    const raw = await res.json();
 
-  const labels = Object.keys(dateTagCount);
-  const values = Object.values(dateTagCount);
+    const dateTagCount = {};
 
-  renderLineChart(labels, values);
-  renderBarChart(labels, values);
+    raw.forEach(item => {
+      const date = item.date;
+      const tagCount = item.tags.length;
+
+      if (!dateTagCount[date]) {
+        dateTagCount[date] = 0;
+      }
+
+      dateTagCount[date] += tagCount;
+    });
+
+    const labels = Object.keys(dateTagCount);
+    const values = Object.values(dateTagCount);
+
+    renderLineChart(labels, values);
+    renderBarChart(labels, values);
+  } catch (error) {
+    console.error("Error fetching or processing data:", error);
+    alert("Failed to fetch data: " + error.message);
+  }
 }
 
 function renderLineChart(labels, values) {
@@ -43,13 +54,8 @@ function renderLineChart(labels, values) {
     options: {
       responsive: true,
       scales: {
-        x: { ticks: { color: "#c9d1d9" } },
-        y: { ticks: { color: "#c9d1d9" } }
-      },
-      plugins: {
-        legend: {
-          labels: { color: "#c9d1d9" }
-        }
+        x: { ticks: { color: "#000" } },
+        y: { ticks: { color: "#000" } }
       }
     }
   });
@@ -70,16 +76,12 @@ function renderBarChart(labels, values) {
     options: {
       responsive: true,
       scales: {
-        x: { ticks: { color: "#c9d1d9" } },
-        y: { ticks: { color: "#c9d1d9" } }
-      },
-      plugins: {
-        legend: {
-          labels: { color: "#c9d1d9" }
-        }
+        x: { ticks: { color: "#000" } },
+        y: { ticks: { color: "#000" } }
       }
     }
   });
 }
 
 fetchData();
+</script>
